@@ -73,7 +73,7 @@ const App = () => {
               React.createElement('details', { style: { textAlign: 'center' } },
                     React.createElement('summary', { style: { paddingLeft: 'auto', paddingRight: 'auto', textAlign: 'left', fontSize: '1.5rem', color: 'Violet' } }, 'About the Site'),
           React.createElement('h2', { style: {paddingLeft: 'auto', paddingRight: 'auto', textAlign: 'left', color: 'cyan' } }, "Welcome to Y.D's Experimental site"),
-          React.createElement('h2', { style: { paddingLeft: 'auto', paddingRight: 'auto', textAlign: 'left',color: 'darkgoldenrod' } }, "Do you know that you can let your parrot hear itslef speak?")
+          React.createElement('h2', { style: { paddingLeft: 'auto', paddingRight: 'auto', textAlign: 'left',color: 'darkgoldenrod' } }, "Do you know that you can let your parrot hear himself speak?")
                                   )
         ),
         React.createElement('div', { style: { textAlign: 'center', color: ColorContent } },
