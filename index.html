@@ -11,17 +11,17 @@
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* 1. Ensure the background container covers the whole screen */
+    /* Full-screen background wrapper */
     #video-background {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1; /* Behind React content */
+      z-index: -1; 
       overflow: hidden;
-      pointer-events: none; /* User clicks "through" it to your app */
-      background: black;
+      pointer-events: none; /* Allows clicking on React components instead of the video */
+      background: #000;
     }
 
     #player {
@@ -33,37 +33,57 @@
       transform: translate(-50%, -50%);
     }
 
-    /* Scaling for different screen sizes */
-    @media (min-aspect-ratio: 16/9) { #player { height: 56.25vw; } }
-    @media (max-aspect-ratio: 16/9) { #player { width: 177.78vh; } }
+    /* Maintains 16:9 ratio to cover screen without black bars */
+    @media (min-aspect-ratio: 16/9) {
+      #player { height: 56.25vw; }
+    }
+    @media (max-aspect-ratio: 16/9) {
+      #player { width: 177.78vh; }
+    }
+
+    /* UI Metadata Overlay */
+    .metadata-overlay {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: white;
+    }
   </style>
 </head>
 <body>
 
-  <!-- 2. Background Video Container -->
+  <!-- Background Video Container -->
   <div id="video-background">
       <div id="player"></div>
   </div>
 
-  <!-- 3. React Root -->
+  <!-- React Root -->
   <div id="root"></div>
 
-  <!-- 4. Hidden/Small UI elements moved from head to body -->
-  <div style="position: absolute; top: 0; right: 0; z-index: 10; background: rgba(255,255,255,0.7); font-size: 10px;">
+  <!-- Legacy Metadata / Debug Info (Moved from Head to Body) -->
+  <div class="metadata-overlay">
     <div>R-700e7e4</div>
-    <img src="data:image/jpeg;base64,..." alt="Small image" width="40" height="40">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ..." alt="Ver" width="44" height="50">
   </div>
 
-  <!-- Scripts -->
+  <!-- 1. YouTube API -->
   <script src="https://www.youtube.com/iframe_api"></script>
+  
+  <!-- 2. Your Background Script -->
   <script src="youtubeScript.js"></script>
   
-  <!-- React Dependencies -->
+  <!-- 3. React and Babel Dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" crossorigin></script>
   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
   
-  <!-- Your App Code -->
+  <!-- 4. Your React Application Code -->
   <script src="https://cdn.jsdelivr.net/gh/yanivdg/ReactToken@2a68dce/src/App.js" type="module" crossorigin></script>
 
 </body>
