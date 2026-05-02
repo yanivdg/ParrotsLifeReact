@@ -3,98 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>Play A Ruling Role Over Time - ReactApp</title>
+  <title>Play A Ruling Role Over Time</title>
   
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* background container for the YouTube player */
     #video-background {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       z-index: -1; 
       overflow: hidden;
-      pointer-events: none; 
+      pointer-events: none;
       background: #000;
     }
-
     #player {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100vw;
-      height: 100vh;
+      top: 50%; left: 50%;
+      width: 100vw; height: 100vh;
       transform: translate(-50%, -50%);
     }
-
-    /* Scaling to ensure video covers the full background */
-    @media (min-aspect-ratio: 16/9) {
-      #player { height: 56.25vw; }
-    }
-    @media (max-aspect-ratio: 16/9) {
-      #player { width: 177.78vh; }
-    }
-
-    /* UI Metadata Overlay for versioning */
+    @media (min-aspect-ratio: 16/9) { #player { height: 56.25vw; } }
+    @media (max-aspect-ratio: 16/9) { #player { width: 177.78vh; } }
+    
     .metadata-overlay {
       position: fixed;
-      top: 10px;
-      left: 10px;
+      top: 10px; left: 10px;
       z-index: 999;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 5px;
-      border-radius: 4px;
-      font-family: monospace;
-      font-size: 12px;
       color: white;
+      font-family: monospace;
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Video Wrapper -->
+  <!-- 1. Background Video -->
   <div id="video-background">
       <div id="player"></div>
   </div>
 
-  <!-- Main React Application Container -->
+  <!-- 2. React Mount Point -->
   <div id="root"></div>
 
-  <!-- FIXED: Essential DOM targets required by your external scripts -->
-  <!-- Providing these prevents the "Cannot set properties of null" errors -->
-  <div id="success_message"></div>
-
-  <!-- Required by the utilities--read-more controller -->
+  <!-- 3. FIXED: Elements required by renderers.js & stimulus.js -->
+  <!-- These are hidden so they don't ruin your UI, but present so scripts don't crash -->
+  <div id="success_message" style="display:none;"></div>
+  
+  <!-- This fixes the 'Missing target element "content"' error -->
   <div data-controller="utilities--read-more" style="display:none;">
       <div data-utilities--read-more-target="content"></div>
   </div>
 
-  <!-- Versioning / Metadata (Moved from <head> to <body>) -->
+  <!-- This fixes the tab_controller and explore_nav attribute errors -->
+  <nav id="explore_nav" style="display:none;">
+      <div class="tab-target" data-target="tab"></div>
+  </nav>
+
+  <!-- 4. Versioning/Logo -->
   <div class="metadata-overlay">
-    <div>R-2f7ee8b-05022026</div>
-    <!-- Replace the src below with your valid base64 or image path -->
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRg..." alt="Site Logo" width="44" height="50">
+    <div>R-2f7ee8b</div>
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRg..." alt="Logo" width="44" height="50">
   </div>
 
-  <!-- 1. External APIs and Libraries -->
+  <!-- 5. Scripts: Ordered to ensure DOM is ready first -->
   <script src="https://www.youtube.com/iframe_api"></script>
-  
-  <!-- 2. Logic to handle background video and commercial dodging -->
   <script src="youtubeScript.js"></script>
   
-  <!-- 3. React Core and Babel Dependencies -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
   
-  <!-- 4. Main React Application -->
-  <script src="https://cdn.jsdelivr.net/gh/yanivdg/ReactToken@2a68dce/src/App.js" type="module" crossorigin></script>
+  <!-- Your Main App -->
+  <script src="https://cdn.jsdelivr.net/gh/yanivdg/ReactToken@2a68dce/src/App.js" type="module"></script>
 
 </body>
 </html>
