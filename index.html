@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* Full-screen background wrapper */
+    /* background container for the YouTube player */
     #video-background {
       position: fixed;
       top: 0;
@@ -20,7 +20,7 @@
       height: 100%;
       z-index: -1; 
       overflow: hidden;
-      pointer-events: none; /* Allows clicking on React components instead of the video */
+      pointer-events: none; 
       background: #000;
     }
 
@@ -33,7 +33,7 @@
       transform: translate(-50%, -50%);
     }
 
-    /* Maintains 16:9 ratio to cover screen without black bars */
+    /* Scaling to ensure video covers the full background */
     @media (min-aspect-ratio: 16/9) {
       #player { height: 56.25vw; }
     }
@@ -41,11 +41,11 @@
       #player { width: 177.78vh; }
     }
 
-    /* UI Metadata Overlay */
+    /* UI Metadata Overlay for versioning */
     .metadata-overlay {
       position: fixed;
       top: 10px;
-      right: 10px;
+      left: 10px;
       z-index: 999;
       background: rgba(255, 255, 255, 0.2);
       padding: 5px;
@@ -58,32 +58,42 @@
 </head>
 <body>
 
-  <!-- Background Video Container -->
+  <!-- Background Video Wrapper -->
   <div id="video-background">
       <div id="player"></div>
   </div>
 
-  <!-- React Root -->
+  <!-- Main React Application Container -->
   <div id="root"></div>
 
-  <!-- Legacy Metadata / Debug Info (Moved from Head to Body) -->
-  <div class="metadata-overlay">
-    <div>R-700e7e4</div>
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ..." alt="Ver" width="44" height="50">
+  <!-- FIXED: Essential DOM targets required by your external scripts -->
+  <!-- Providing these prevents the "Cannot set properties of null" errors -->
+  <div id="success_message"></div>
+
+  <!-- Required by the utilities--read-more controller -->
+  <div data-controller="utilities--read-more" style="display:none;">
+      <div data-utilities--read-more-target="content"></div>
   </div>
 
-  <!-- 1. YouTube API -->
+  <!-- Versioning / Metadata (Moved from <head> to <body>) -->
+  <div class="metadata-overlay">
+    <div>R-2f7ee8b-05022026</div>
+    <!-- Replace the src below with your valid base64 or image path -->
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRg..." alt="Site Logo" width="44" height="50">
+  </div>
+
+  <!-- 1. External APIs and Libraries -->
   <script src="https://www.youtube.com/iframe_api"></script>
   
-  <!-- 2. Your Background Script -->
+  <!-- 2. Logic to handle background video and commercial dodging -->
   <script src="youtubeScript.js"></script>
   
-  <!-- 3. React and Babel Dependencies -->
+  <!-- 3. React Core and Babel Dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" crossorigin></script>
   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
   
-  <!-- 4. Your React Application Code -->
+  <!-- 4. Main React Application -->
   <script src="https://cdn.jsdelivr.net/gh/yanivdg/ReactToken@2a68dce/src/App.js" type="module" crossorigin></script>
 
 </body>
